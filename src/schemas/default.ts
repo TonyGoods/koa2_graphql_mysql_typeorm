@@ -38,26 +38,6 @@ const RootSchema = new GraphQLObjectType({
         return studentList;
       },
     },
-    // 获了一个导航类型下的数据
-    // oneNavList: {
-    //   type: NavSchema,
-    //   args: {
-    //     _id: {
-    //       type: GraphQLString,
-    //     },
-    //     status: {
-    //       type: GraphQLString,
-    //     },
-    //   },
-    //   async resolve(parent, args) {
-    //     var oneNavList = await DB.find("nav", {
-    //       _id: DB.getObjectId(args._id),
-    //       status: args.status,
-    //     });
-    //     return oneNavList[0];
-    //   },
-    // },
-
     student: {
       type: StudentSchema,
       args: {

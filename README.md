@@ -328,3 +328,58 @@ createConnection().then(() => {
 此时，打开浏览器，在 http://localhost:3000/graphql 中可以开始调试。
 
 ![graphiql截图](./images/graphiql.png)
+
+---
+
+## 在 _React_ 中调用
+
+```ts
+fetch("/graphql?", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `{
+          studentList{
+            id
+            name
+            age
+            gender
+          }
+        }`,
+  }),
+});
+fetch("/graphql?", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `{
+          student(id: 1){
+            id
+            name
+            age
+            gender
+          }
+        }`,
+  }),
+});
+fetch("/graphql?", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    query: `mutation add{
+          addStudent(name: "哈喽", gender: "男",age: 12){
+            id
+            name
+            age
+            gender
+          }
+        }`,
+  }),
+});
+```
