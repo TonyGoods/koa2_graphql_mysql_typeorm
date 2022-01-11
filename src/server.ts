@@ -1,17 +1,22 @@
 import Koa from "koa";
-import bodyParser from "koa-bodyparser";
 import { createConnection } from "typeorm";
+import { graphqlHTTP } from "koa-graphql";
+import mount from "koa-mount";
 import "reflect-metadata";
-import { StundetController } from "./Controllers/Student";
+import GraphQLDefaultSchema from "./schemas/default";
 
 createConnection().then(() => {
   const app = new Koa();
 
-  app.use(bodyParser());
+  app.use(
+    mount(
+      "/graphql",
+      graphqlHTTP({
+        schema: GraphQLDefaultSchema,
+        graphiql: true,
+      })
+    )
+  );
 
-  app.use(async (ctx) => {
-    StundetController.fetchAllStudents(ctx);
-  });
-
-  app.listen(3000);
+  app.listen(process.env.PORT);
 });
